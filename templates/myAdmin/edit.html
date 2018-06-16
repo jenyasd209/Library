@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<form action="" method="post">
+        {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="row d-flex mt-4">
+            <div class="col-12 justify-content-center">
+                <div class="h2 text-info">Редагування:</div>
+            </div>
+        </div>
+        <div class="form-group row mt-5">
+            <div class="col-2 mr-4 mt-1">
+                <label>Назва: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="title" class="form-control" placeholder="Назва" value="{{ book.title }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Автор: </label>
+            </div>
+            <div class="col-5">
+                <select name="id_author" class="form-control">
+                    {% for author in authors %}
+                    <!-- <option value="{{ categorye.id }}"
+                                    {% if post.id_category.id == categorye.id %}selected{% endif %}>{{ categorye.name }}</option> -->
+                        <option value="{{ author.id }}"
+                                    {% if book.id_author.id == author.id %}selected{% endif %}>{{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mt-5">
+                <div class="col-2 mr-4 mt-1">
+                    <label>Рік публікації: </label>
+                </div>
+                <div class="col-5">
+                    <input type="text" name="year_publish" class="form-control" placeholder="Рік публікації" value="{{ book.year_publish }}">
+                </div>
+            </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Опис: </label>
+            </div>
+            <div class="col-5">
+                <textarea cols="90" rows="15" name="text" placeholder="Опис" > {{ book.text }} </textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Кількість: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="count" class="form-control" placeholder="Кількість" value="{{ book.count }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Кількість сторінок: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="count_page" class="form-control" placeholder="Кількість сторінок" value="{{ book.count_page }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Видавництво: </label>
+            </div>
+            <div class="col-5">
+                <select name="publishing_house" class="form-control">
+                    {% for publishing_house in publishing_houses %}
+                    <option value="{{ author.id }}"
+                                    {% if book.id_author.id == author.id %}selected{% endif %}>{{ author.last_name }}</option>
+                        <option value="{{ publishing_house.id }}"
+                                {% if book.id_publishing_house.id == publishing_house.id %}selected{% endif %}>{{ publishing_house.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Жанр: </label>
+            </div>
+            <div class="col-5">
+                <select name="genre" class="form-control">
+                    {% for genre in genres %}
+                        <option value="{{ genre.id }}"
+                                {% if book.id_genre.id == genre.id %}selected{% endif %}>{{ genre.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Зображення: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="intro_images" class="form-control" placeholder="Enter ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-8 mr-4 mt-1 d-flex justify-content-center">
+                <button type="submit" class="btn mr-4 btn-success ">Редагувати</button>
+                <a href="/admins/delete/{{id_book}}/" type="submit" class="btn btn-success ">Видалити</a>
+            </div>
+        </div>
+</form>
+</div>
+    <!-- {{ form.as_p }} -->    
+    
+{% endblock %}

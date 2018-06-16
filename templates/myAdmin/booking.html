@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}User - cabinet{% endblock %}
+
+
+{% block content %}
+    <div class=" bg-light mt-5 mb-3 container">
+            <div class="row-12 d-flex" style="width: 18rem;">
+                <a href="/admins" class="col-3 mr-sm-2 mr-2 mt-2">Книги</a>
+                <a href="/admins/booking/" class="col-8 mt-2">Заброньовані книги</a>
+                <a href="/admins/on_hands/" class="col-7 mt-2">Книги у читачів</a>
+            </div>
+            <div class="row d-flex mt-4">
+                <div class="col-12 justify-content-center">
+                    <form class="form-inline my-2 my-lg-0 " action="/admins/booking/booking_search/" method="GET">
+                        <input class="form-control mr-sm-2" type="search" name="search_booking" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        <div class="row d-flex mt-4">
+            <div class="col-12 justify-content-center">
+                <div class="h2 text-info">Список книг у резерві:</div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-4 d-flex">
+            <div class="col-1">№</div>
+            <div class="col-2">Читач</div>
+            <div class="col-2">Книга</div>
+            <div class="col-2">Дата бронювання</div>
+            <div class="col-2">Дата закінчення</div>
+        </div>
+        {% for booking in bookings_on_page %}
+            <div class="row mt-1 mb-2">
+                <div class="col-1">{{ booking.id }}</div>
+                <div class="col-2">{{ booking.id_reader.last_name }}</div>
+                <div class="col-2">{{ booking.id_book.title }}</div>
+                <div class="col-2">{{ booking.date_booking }}</div>
+                <div class="col-2">{{ booking.reserved_until }}</div>
+                <div class="col-1"><a href="/admins/booking/{{ booking.id }}/"><img src="/static/image/submit.png"
+                    style="height: 30px; width: 30px;"
+                    alt=""></a>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row mr-5 justify-content-center">
+            <div class="row justify-content-center">
+                <a href="/admins/delete/" class="btn btn-success col-auto mt-5 mb-3 ml-5">Видалити усі просрочені бронювання</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if bookings_on_page.paginator.num_pages >= 1 %}
+                            {% if not bookings_on_page.has_previous %}
+                                <li class="page-item disabled">
+                                    <a class="page-link text-dark" href="#">Предыдущая</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link text-success"
+                                    href="/admins/booking/?page={{ bookings_on_page.previous_page_number }}">Предыдущая</a>
+                                </li>
+                            {% if bookings_on_page.previous_page_number != 1 %}
+                                <li class="page-item">
+                                    <a class="page-link text-success"
+                                    href="/admins/booking/?page=1">1</a>
+                                </li>
+                            {% endif %}
+                            <li class="page-item">
+                                <a class="page-link text-success"
+                                href="/admins/booking/?page={{ bookings_on_page.previous_page_number }}">{{ bookings_on_page.previous_page_number }}</a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item disabled">
+                            <a class="page-link bg-success text-white"
+                            href="/admins/booking/?page={{ bookings_on_page.number }}">{{ bookings_on_page.number }}</a>
+                        </li>
+                        {% if not bookings_on_page.has_next %}
+                            <li class="page-item disabled">
+                                <a class="page-link text-dark" href="#">Следующая</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link text-success"
+                                href="/admins/booking/?page={{ bookings_on_page.next_page_number }}">{{ bookings_on_page.next_page_number }}</a>
+                            </li>
+                        {{ bookings_on_page.paginator.number }}
+                            {% if bookings_on_page.next_page_number != bookings_on_page.paginator.num_pages %}
+                                <li class="page-item">
+                                    <a class="page-link text-success"
+                                    href="/admins/booking/?page={{ bookings_on_page.paginator.num_pages }}">{{ bookings_on_page.paginator.num_pages }}</a>
+                                </li>
+                            {% endif %}
+                                <li class="page-item">
+                                    <a class="page-link text-success"
+                                    href="/admins/booking/?page={{ bookings_on_page.next_page_number }}">Следующая</a>
+                                </li>
+                            {% endif %}
+    
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}

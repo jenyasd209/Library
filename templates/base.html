@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GoodLib</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+	<link rel="icon" href="{% static "image/bg.png" %}" type="image/x-icon">
+</head>
+<body>
+<header>
+    <div class="main-jpg"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Бібліотека</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Головна<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Про нас</a>
+                </li>
+                <li class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">
+                        Книги
+                        <!-- <b class="caret"></b> -->
+                      </a>
+                      <ul class="nav-item dropdown-menu">
+                        <li><a href="/books" class="nav-link">Усі</a></li>
+                        {% for genre in genres %}
+                            <li>
+                                <a href="/books/genre/{{ genre.id }}" class="nav-link">{{ genre.name }}</a>
+                            </li>
+                        {% endfor %}
+                      </ul>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Книги</a>
+                </li> -->
+                <div class="row d-flex mt-2 ml-5">
+                    <div class="col-12 justify-content-center">
+                        <form class="form-inline my-2 my-lg-0 " action="/books/books_search/" method="GET">
+                            <input class="form-control mr-sm-2" type="search" name="search_books" placeholder="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+            <!-- <div class="row d-flex mt-2 mr-5">
+                    <div class="col-12 justify-content-center">
+                        <form class="form-inline my-2 my-lg-0 ">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div> -->
+            {% if user.is_authenticated and not user.is_staff %}
+        <div class="bg-light d-flex justify-content-end">
+            <form class="form-inline my-2 my-lg-0">
+                <a href="/user/exit/" class="form-control mr-sm-2 mr-2 mt-2">Вихід</a>
+                <a href="/user/" class="form-control mr-sm-2 mr-2 mt-2">Кабінет</a>
+                <!-- <a href="" class="form-control mr-sm-2 mr-2 mt-2">Реєстрація</a> -->
+            </form>
+        </div>
+        {% else %}
+        {% if user.is_authenticated and user.is_staff %}
+        <div class="bg-light d-flex justify-content-end">
+            <form class="form-inline my-2 my-lg-0">
+                <a href="/admins/exit/" class="form-control mr-sm-2 mr-2 mt-2">Вихід</a>
+                <a href="/admins/" class="form-control mr-sm-2 mr-2 mt-2">Кабінет</a>
+            </form>
+        </div>
+        {% else %}
+        <div class="bg-light d-flex justify-content-end">
+            <form class="form-inline my-2 my-lg-0">
+                <a href="/user/auth/" class="form-control mr-sm-2 mr-2 mt-2">Вхід</a>
+                <a href="/user/reg/" class="form-control mr-sm-2 mr-2 mt-2">Реєстрація</a>
+            </form>
+        </div>
+        {% endif %}
+    {% endif %}
+            <!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+        </div>
+        <div class="bg-light d-flex justify-content-end">
+            <form class="form-inline my-2 my-lg-0">
+            </form>
+        </div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+
+</footer>
+</body>
+<script src="{% static 'jquery-3.3.1.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+</html>

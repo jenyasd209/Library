@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-2 mb-3">
+        <div class="col-9"> 
+                <div class="row d-flex mt-4">
+                        <div class="col-12 justify-content-center">
+                            <div class="h2 text-info">Опис та бронювання книги:</div>
+                        </div>
+                    </div>
+            <div class="row mb-3">
+                <div class="col-3 ml-2" style="width: 18rem;">
+                    {% load staticfiles %}
+                    <img class="inf-book" src="{{ book.intro_images }}" alt="Card image cap">
+                </div>
+                <div class="col-8 ml-2 mt-5" style="width: 18rem;">
+                    <p>Автор: {{ book.id_author.first_name }} 
+                        {% if book.id_author.middle_name != "" %} 
+                            ({{ book.id_author.middle_name }})
+                        {% endif %}
+                        {{ book.id_author.last_name }}</p>
+
+                    <p>Назва: "{{ book.title }}"</p>
+            
+                    <p>Рік: {{ book.year_publish }}</p>
+                </div>
+            </div>
+            <div class="row ml-2">
+                <div class="col-12">
+                    <h2 class="text-center">Опис</h2>
+                    <p> {{ book.text }} </p>
+                </div>
+            </div>
+            {% if user.is_authenticated and book.count >= 1 %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-end">
+                <form class="form-inline my-2 mb-3 my-lg-0">
+                    <a href="/books/{{book.id}}/reserv" class="btn btn-success">Забронювати</a>
+                </form>
+            </div>
+        <!-- <div class="form-group row">
+            <div class="col-9 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success ">Забронювати</button>
+            </div>
+        </div> -->
+    </form>
+    {% endif %}
+        </div>
+        <div class="col-3">
+            <ul class="list-group">
+                {% for genre in genres %}
+                <li>
+                    <a href="/books/genre/{{ genre.id }}" class="list-group-item">{{ genre.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>    
+        </div>
+    </div>
+</div>
+{% endblock %}

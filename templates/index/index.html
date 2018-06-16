@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-2">
+        <div class="card col-12" style="width: 18rem;">
+            {% load staticfiles %}
+            <div class="card-body">
+                <p class="card-text">Бібліоте́ка або книгозбі́р, заст. вівліофіка (грец. βιβλιον — «книжка» і θηκη — «сховище», «скриня») — культурно-освітній заклад, що здійснює збирання друкованих і рукописних матеріалів, проводить їхнє опрацювання та відображення в каталогах, організовує відповідне їхнє зберігання, збереження і обслуговування ними читачів.</p>
+                <img class="card-img-top" src="{% static "image/lib.jpg" %}">
+            </div>
+        </div>
+        <!-- <div class="card col-2" style="width: 18rem;">
+            <p class="font-weight-bold">Book of Day</p>
+            {% load staticfiles %}
+            <img class="card-img-top" src="{% static "image/hero.jpg" %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Hero</h5>
+                <p class="card-text">Good book</p>
+                <a href="#" class="btn btn-primary">Перейти</a>
+            </div>
+        </div> -->
+    </div>
+</div>
+{% endblock %}

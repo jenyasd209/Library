@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <!-- {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+        {% endif %}
+        {% csrf_token %} -->
+        <div class="row d-flex mt-4">
+                <div class="col-12 justify-content-center">
+                    <div class="h2 text-info">Реєстрація:</div>
+                </div>
+            </div>
+        <div class="form-group row mt-2">
+            <div class="col-2 mr-4 mt-1">
+                <label>Ім'я: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="first_name" class="form-control" placeholder="Ім'я">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Фамілія: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="last_name" class="form-control" placeholder="Фамілія">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>По батькові: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="patronymic" class="form-control" placeholder="По батькові">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Логін: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="login" class="form-control" placeholder="Логін">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Пароль: </label>
+            </div>
+            <div class="col-5">
+                <input type="password" name="password" class="form-control" placeholder="Ім'я">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>E-mail: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="e-mail" class="form-control" placeholder="email@email.com">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Адреса: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="address" class="form-control" placeholder="Адреса">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Телефон: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="telephone" class="form-control" placeholder="Телефон">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-8 mr-4 mt-1 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success ">Зареєструватись</button>
+            </div>
+        </div>
+</form>
+</div>
+    <!-- {{ form.as_p }} -->    
+    
+{% endblock %}

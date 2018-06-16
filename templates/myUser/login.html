@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<form id="login" method="post">
+    {% csrf_token %}
+    <h2 style="text-align: center;">Авторизація</h2>
+    <fieldset id="inputs">
+                    <!-- <input type="text" name="username" autofocus maxlength="254" required id="username"> -->
+                    <input type="text" name="{{ form.login.html_name }}" class="form-control"
+                               id="exampleInputLogin1"
+                               placeholder="Enter login">
+                    <input type="password" name="{{ form.password.html_name }}" class="form-control"
+                               id="exampleInputPassword1"
+                               placeholder="Password">
+                    <!-- <input type="password" name="password" required="" id="password"> -->
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" value="Увійти">
+    </fieldset>
+</form>
+</div>
+{# Assumes you setup the password_reset view in your URLconf #}
+{% endblock %}

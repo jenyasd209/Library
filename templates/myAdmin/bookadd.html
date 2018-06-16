@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<form action="" method="post" enctype="multipart/form-data">
+        {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="row d-flex mt-4">
+            <div class="col-12 justify-content-center">
+                <div class="h2 text-info">Добавлення книги:</div>
+            </div>
+        </div>
+        <div class="form-group row mt-5">
+            <div class="col-2 mr-4 mt-1">
+                <label>Назва: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="title" class="form-control" placeholder="Назва">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Автор: </label>
+            </div>
+            <div class="col-5">
+                <select name="id_author" class="form-control">
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mt-5">
+                <div class="col-2 mr-4 mt-1">
+                    <label>Рік публікації: </label>
+                </div>
+                <div class="col-5">
+                    <input type="text" name="year_publish" class="form-control" placeholder="Рік публікації">
+                </div>
+            </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Опис: </label>
+            </div>
+            <div class="col-5">
+                <textarea cols="90" rows="15" name="text" placeholder="Опис"> </textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Кількість: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="count" class="form-control" placeholder="Кількість">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Кількість сторінок: </label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="count_page" class="form-control" placeholder="Кількість сторінок">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Видавництво: </label>
+            </div>
+            <div class="col-5">
+                <select name="publishing_house" class="form-control">
+                    {% for publishing_house in publishing_houses %}
+                        <option value="{{ publishing_house.id }}">{{ publishing_house.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Жанр: </label>
+            </div>
+            <div class="col-5">
+                <select name="genre" class="form-control">
+                    {% for genre in genres %}
+                        <option value="{{ genre.id }}">{{ genre.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 mr-4 mt-1">
+                <label>Зображення: </label>
+            </div>
+            <div class="col-5">
+                <input required type="file" name="intro_file" class="form-control-file" id="introImgField">
+                <!-- <input type="text" name="intro_images" class="form-control" placeholder="Enter "> -->
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-8 mr-4 mt-1 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success ">Додати</button>
+            </div>
+        </div>
+</form>
+</div>
+    <!-- {{ form.as_p }} -->    
+    
+{% endblock %}
